@@ -19,7 +19,8 @@ function [ C_out ] = syrk_ln_blk_var1(A,C)
 
   while ( size( AT, 1 ) < size( A, 1 ) )
 
-    b = min(size( AB, 1 ), 64 ); 
+     
+    b = size(AB,1);
 
     [ A0, ...
       A1, ...
@@ -36,7 +37,7 @@ function [ C_out ] = syrk_ln_blk_var1(A,C)
     %------------------------------------------------------------%
 
     C21 = A2 * A1.' + C21;
-    C11 = A1 * A1.' + C11;    
+    C11 = (A1) * A1.' + C11;    
            
 
     %------------------------------------------------------------%
@@ -57,5 +58,6 @@ function [ C_out ] = syrk_ln_blk_var1(A,C)
 
   C_out = [ CTL, CTR
             CBL, CBR ];
+  C_out = tril(C_out);
 
 end

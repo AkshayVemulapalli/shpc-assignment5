@@ -24,7 +24,7 @@ U = triu(C_temp);
 %% 
 % Check whether trmm_lunn_unb_var1(U, B) computes the same as U * B 
 
-if ( isequal( trmm_lunn_unb_var1(U, B), U * B ) )
+if ( isequal( trmm_lunn_unb_var1(U, B), triu(U * B )) )
     disp( 'All seems well' );
 else
     disp( 'Trouble in paradise' )

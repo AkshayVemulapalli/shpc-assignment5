@@ -56,4 +56,10 @@ function [ B_out ] = trmm_lunn_unb_var1(U,B)
   B_out = [ BT
             BB ];
 
+  % Final verification
+fprintf('\n=== FINAL RESULT ===\n');
+fprintf('Computed result:\n'); disp(B_out);
+fprintf('Expected result (U*B):\n'); disp((U*B));
+
+
 end
