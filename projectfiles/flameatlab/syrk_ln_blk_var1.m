@@ -7,7 +7,7 @@
 % Programmed by: Akshar, Akshay, Zaid
 %                ak52397@utexas.edu
 
-function [ C_out ] = syrk_ln_blk_var1(A,C)
+function [ C_out ] = syrk_ln_blk_var1(A,C, nb_alg)
 
   [ AT, ...
     AB ] = FLA_Part_2x1( A, ...
@@ -20,7 +20,7 @@ function [ C_out ] = syrk_ln_blk_var1(A,C)
   while ( size( AT, 1 ) < size( A, 1 ) )
 
      
-    b = size(AB,1);
+    b = min(size(AB,1), nb_alg );
 
     [ A0, ...
       A1, ...

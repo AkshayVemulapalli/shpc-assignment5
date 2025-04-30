@@ -13,11 +13,12 @@ fprintf('\n==== Running FLAME Test Suite ====\n');
 A = randi([1,3], [m, n]); % random m x n matrix
 C = randi([-3, 3], [m, m]); % random m x m matrix
 C = tril(C); % C is a symmetric matrix, and we only store and update its lower triangle
+nb_alg = 10;
 
 syrk_ln_expected_output = tril(A * (A.') + C); % we tril matlab's output to match our format of only the lower triangle being stored 
 
 % ----- Test 1: syrk_ln_blk_var1 -----
-test1_result = syrk_ln_blk_var1(A, C);\
+test1_result = syrk_ln_blk_var1(A, C, nb_alg);
 if isequal(test1_result, syrk_ln_expected_output)
     fprintf('All is well for : syrk_ln_blk_var1\n');
 else
@@ -40,7 +41,7 @@ U = triu(U);
 trmm_lunn_expected_output = U * B;
 
 % ----- Test 3: trmm_lunn_blk_var1 -----
-test3_result = trmm_lunn_blk_var1(U, B);
+test3_result = trmm_lunn_blk_var1(U, B, nb_alg);
 if isequal(test3_result, trmm_lunn_expected_output)
     fprintf('All is well for : trmm_lunn_blk_var1\n');
 else

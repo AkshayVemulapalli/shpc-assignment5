@@ -24,7 +24,7 @@ C = tril(C);
 %% 
 % Check whether syrk_ln_blk_var1( L, C ) computes the same as L*(L.') + C 
 
-if ( isequal( syrk_ln_blk_var1(L, C),tril( L*(L.') + C )) )
+if ( isequal( syrk_ln_blk_var1(C, L, 10),tril( L*(L.') + C )) )
     disp( 'All seems well' );
 else
     disp( 'Trouble in paradise' )

@@ -7,7 +7,7 @@
 % Programmed by: Akshar, Akshay, Zaid
 %                ak52397@utexas.edu
 
-function [ B_out ] = trmm_lunn_blk_var1(U,B)
+function [ B_out ] = trmm_lunn_blk_var1(U,B, nb_alg )
 
   [ BT, ...
     BB ] = FLA_Part_2x1( B, ...
@@ -19,7 +19,7 @@ function [ B_out ] = trmm_lunn_blk_var1(U,B)
 
   while ( size( BT, 1 ) < size( B, 1 ) )
 
-    b =  size( BB, 1 );
+    b =  min(size( BB, 1 ), nb_alg );
 
     [ B0, ...
       B1, ...
