@@ -41,8 +41,9 @@ int trmm_lunn_unb_var1( FLA_Obj U, FLA_Obj B )
 
     /*------------------------------------------------------------*/
 
-      FLA_Ger( FLA_ONE, l21, b1t, B2 );
-      FLA_Scal( lambda11, b1t );
+    //  B0 = B0 + u01*b1t;
+      FLA_Ger( FLA_ONE, u01, b1t, B0 );
+      FLA_Scal( upsilon11, b1t );
 
     /*------------------------------------------------------------*/
 
