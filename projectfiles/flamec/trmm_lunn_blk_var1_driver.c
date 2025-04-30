@@ -9,7 +9,7 @@
 #define TRUE 1
 #define FALSE 0
 
-void trmm_llnn_unb_var1( FLA_Obj, FLA_Obj );
+void trmm_lunn_blk_var1( FLA_Obj, FLA_Obj );
 
 int main(int argc, char *argv[])
 {
