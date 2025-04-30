@@ -41,9 +41,10 @@ int Syrk_ln(_A,_C_)_unb( FLA_Obj C, FLA_Obj A )
 
     /*------------------------------------------------------------*/
 
-    /*                       update line 1                        */
-    /*                             :                              */
-    /*                       update line n                        */
+    //c21 = A2 * a1t.' + c21;
+    FLA_Gemv( FLA_NO_TRANSPOSE, FLA_ONE, A2, a1t, FLA_ONE, c21 ); //rly dk if this will work
+    //gamma11 = a1t * a1t.' + gamma11;
+    FLA_Dots( FLA_ONE, a1t, a1t, FLA_ONE, gamma11 );
 
     /*------------------------------------------------------------*/
 

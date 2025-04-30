@@ -45,9 +45,12 @@ int Syrk_ln(_A,_C_)_blk( FLA_Obj C, FLA_Obj A, int nb_alg )
 
     /*------------------------------------------------------------*/
 
-    /*                       update line 1                        */
-    /*                             :                              */
-    /*                       update line n                        */
+    // C21 = A2 * A1^T + C21
+    FLA_Gemm( FLA_NO_TRANSPOSE, FLA_TRANSPOSE, FLA_ONE, A2, A1, FLA_ONE, C21 );
+    // C11 = A1 * A1^T + C11
+    /* C = tril( A * A' + C  ) + triu( C, -1 )? */
+    FLA_Syrk( FLA_LOWER_TRIANGULAR, FLA_NO_TRANSPOSE, 
+      FLA_ONE, A1, FLA_ONE, C11);
 
     /*------------------------------------------------------------*/
 
