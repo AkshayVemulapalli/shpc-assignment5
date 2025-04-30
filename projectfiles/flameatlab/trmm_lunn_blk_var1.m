@@ -4,8 +4,8 @@
 % For licensing information see
 %                http://www.cs.utexas.edu/users/flame/license.html 
 %                                                                                 
-% Programmed by: Name of author
-%                Email of author
+% Programmed by: Akshar, Akshay, Zaid
+%                ak52397@utexas.edu
 
 function [ B_out ] = trmm_lunn_blk_var1(U,B)
 

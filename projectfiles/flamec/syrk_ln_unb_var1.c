@@ -4,13 +4,13 @@
    For licensing information see
                   http://www.cs.utexas.edu/users/flame/license.html 
 
-   Programmed by: Name of author
-                  Email of author
+   Programmed by: Akshar, Akshay, Zaid
+                ak52397@utexas.edu
                                                                      */
 
 #include "FLAME.h"
 
-int Syrk_ln(_A,_C_)_unb( FLA_Obj C, FLA_Obj A )
+int Syrk_ln(A,C)_unb( FLA_Obj C, FLA_Obj A )
 {
   FLA_Obj CTL,   CTR,      C00,  c01,     C02, 
           CBL,   CBR,      c10t, gamma11, c12t,

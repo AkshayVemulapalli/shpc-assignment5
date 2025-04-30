@@ -1,16 +1,15 @@
-
 /* Copyright 2025 The University of Texas at Austin  
  
    For licensing information see
                   http://www.cs.utexas.edu/users/flame/license.html 
 
-   Programmed by: Name of author
-                  Email of author
+   Programmed by: Akshar, Akshay, Zaid
+                ak52397@utexas.edu
                                                                      */
 
 #include "FLAME.h"
 
-int Syrk_ln(_A,_C_)_blk( FLA_Obj C, FLA_Obj A, int nb_alg )
+int syrk_ln_blk_var1( FLA_Obj C, FLA_Obj A)
 {
   FLA_Obj CTL,   CTR,      C00, C01, C02, 
           CBL,   CBR,      C10, C11, C12,
@@ -30,7 +29,8 @@ int Syrk_ln(_A,_C_)_blk( FLA_Obj C, FLA_Obj A, int nb_alg )
 
   while ( FLA_Obj_length( CTR ) < FLA_Obj_length( C ) ){
 
-    b = min( FLA_Obj_length( CBL ), nb_alg );
+    //b = min( FLA_Obj_length( CBL ), nb_alg );
+    b = (FLA_Obj_length( CBL ));
 
     FLA_Repart_2x2_to_3x3( CTL, /**/ CTR,       &C00, &C01, /**/ &C02,
                         /* ************* */   /* ******************** */

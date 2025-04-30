@@ -4,13 +4,13 @@
    For licensing information see
                   http://www.cs.utexas.edu/users/flame/license.html 
 
-   Programmed by: Name of author
-                  Email of author
+   Programmed by: Akshar, Akshay, Zaid
+                ak52397@utexas.edu
                                                                      */
 
 #include "FLAME.h"
 
-int trmm_lunn(_B,_U_)_blk( FLA_Obj B, FLA_Obj U, int nb_alg )
+int trmm_lunn(B,U)_blk( FLA_Obj B, FLA_Obj U, int nb_alg )
 {
   FLA_Obj BT,              B0,
           BB,              B1,
