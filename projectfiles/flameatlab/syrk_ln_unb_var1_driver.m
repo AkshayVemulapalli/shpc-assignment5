@@ -9,19 +9,24 @@ addpath(pathstoadd);
 % Setting the matrix dimension
 
 m = 6;              % problem sizes
+n = 4;
 %% 
 
 % Setting up a triangular matrix
-L = randi( [1,3], [m,m] );  % random m x m matrix
-L = tril( L );              % make the matrix lower triangular
+L = randi( [1,3], [m,n] );  % random m x m matrix
+            % make the matrix lower triangular
  
 % Create a random matrix B
 
-B = randi( [-3,3], [m,n] );
-%% 
-% Check whether trmm_llnn_unb_var1( L, B ) computes the same as L * B
+C_temp = randi([-3, 3], [m, m]);
 
-if ( isequal( trmm_llnn_unb_var1( L, B ), L*B ) )
+C = tril(C_temp) + tril(C_temp,-1)';
+C = tril(C);
+
+%% 
+% Check whether trmm_llnn_unb_var1( L, B ) computes the same as L*(L.') + C
+
+if ( isequal( syrk_ln_unb_var1(L, C), tril(L*(L.') + C) ) )
     disp( 'All seems well' );
 else
     disp( 'Trouble in paradise' )

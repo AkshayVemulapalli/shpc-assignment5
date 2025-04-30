@@ -4,10 +4,10 @@
 % For licensing information see
 %                http://www.cs.utexas.edu/users/flame/license.html 
 %                                                                                 
-% Programmed by: Name of author
-%                Email of author
+% Programmed by: Akshar, Akshay, Zaid
+%                ak52397@utexas.edu
 
-function [ C_out ] = Syrk_ln(_A,_C_)_unb( A, C )
+function [ C_out ] = syrk_ln_unb_var1(A,C)
 
   [ AT, ...
     AB ] = FLA_Part_2x1( A, ...
@@ -33,9 +33,8 @@ function [ C_out ] = Syrk_ln(_A,_C_)_unb( A, C )
 
     %------------------------------------------------------------%
 
-    %                       update line 1                        %
-    %                             :                              %
-    %                       update line n                        %
+    c21 = A2 * a1t.' + c21;
+    gamma11 = a1t * a1t.' + gamma11;                   
 
     %------------------------------------------------------------%
 

@@ -4,10 +4,10 @@
 % For licensing information see
 %                http://www.cs.utexas.edu/users/flame/license.html 
 %                                                                                 
-% Programmed by: Name of author
-%                Email of author
+% Programmed by: Akshar, Akshay, Zaid
+%                ak52397@utexas.edu
 
-function [ C_out ] = Syrk_ln(_A,_C_)_blk( A, C, nb_alg )
+function [ C_out ] = syrk_ln_blk_var1(A,C)
 
   [ AT, ...
     AB ] = FLA_Part_2x1( A, ...
@@ -19,7 +19,7 @@ function [ C_out ] = Syrk_ln(_A,_C_)_blk( A, C, nb_alg )
 
   while ( size( AT, 1 ) < size( A, 1 ) )
 
-    b = min( size( AB, 1 ), nb_alg );
+    b = min(size( AB, 1 ), 64 ); 
 
     [ A0, ...
       A1, ...
@@ -35,9 +35,9 @@ function [ C_out ] = Syrk_ln(_A,_C_)_blk( A, C, nb_alg )
 
     %------------------------------------------------------------%
 
-    %                       update line 1                        %
-    %                             :                              %
-    %                       update line n                        %
+    C21 = A2 * A1.' + C21;
+    C11 = A1 * A1.' + C11;    
+           
 
     %------------------------------------------------------------%
 

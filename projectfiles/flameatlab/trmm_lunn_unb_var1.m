@@ -4,10 +4,11 @@
 % For licensing information see
 %                http://www.cs.utexas.edu/users/flame/license.html 
 %                                                                                 
-% Programmed by: Name of author
-%                Email of author
+% Programmed by: Akshar, Akshay, Zaid
+%                ak52397@utexas.edu
+% to run testcase : matlab -batch "trmm_lunn_unb_var1_driver"
 
-function [ B_out ] = trmm_lunn(_B,_U_)_unb( B, U )
+function [ B_out ] = trmm_lunn_unb_var1(U,B)
 
   [ BT, ...
     BB ] = FLA_Part_2x1( B, ...
@@ -15,7 +16,7 @@ function [ B_out ] = trmm_lunn(_B,_U_)_unb( B, U )
 
   [ UTL, UTR, ...
     UBL, UBR ] = FLA_Part_2x2( U, ...
-                               0, 0, 'FLA_TL' );
+                               0, 0, 'FLA_TR' );
 
   while ( size( BT, 1 ) < size( B, 1 ) )
 
@@ -29,13 +30,12 @@ function [ B_out ] = trmm_lunn(_B,_U_)_unb( B, U )
       u10t, upsilon11, u12t, ...
       U20,  u21,       U22 ] = FLA_Repart_2x2_to_3x3( UTL, UTR, ...
                                                       UBL, UBR, ...
-                                                      1, 1, 'FLA_BR' );
+                                                      1, 1, 'FLA_BL' );
 
     %------------------------------------------------------------%
 
-    %                       update line 1                        %
-    %                             :                              %
-    %                       update line n                        %
+    B0 = u01 * b1t + B0;
+    b1t = upsilon11 * b1t;
 
     %------------------------------------------------------------%
 
@@ -49,7 +49,7 @@ function [ B_out ] = trmm_lunn(_B,_U_)_unb( B, U )
       UBL, UBR ] = FLA_Cont_with_3x3_to_2x2( U00,  u01,       U02,  ...
                                              u10t, upsilon11, u12t, ...
                                              U20,  u21,       U22, ...
-                                             'FLA_TL' );
+                                             'FLA_TR' );
 
   end
 

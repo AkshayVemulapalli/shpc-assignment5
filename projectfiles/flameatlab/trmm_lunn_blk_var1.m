@@ -7,7 +7,7 @@
 % Programmed by: Name of author
 %                Email of author
 
-function [ B_out ] = trmm_lunn(_B,_U_)_blk( B, U, nb_alg )
+function [ B_out ] = trmm_lunn_blk_var1(U,B)
 
   [ BT, ...
     BB ] = FLA_Part_2x1( B, ...
@@ -15,11 +15,11 @@ function [ B_out ] = trmm_lunn(_B,_U_)_blk( B, U, nb_alg )
 
   [ UTL, UTR, ...
     UBL, UBR ] = FLA_Part_2x2( U, ...
-                               0, 0, 'FLA_TL' );
+                               0, 0, 'FLA_TR' );
 
   while ( size( BT, 1 ) < size( B, 1 ) )
 
-    b = min( size( BB, 1 ), nb_alg );
+    b = min( size( BB, 1 ), 64 );
 
     [ B0, ...
       B1, ...
@@ -31,13 +31,12 @@ function [ B_out ] = trmm_lunn(_B,_U_)_blk( B, U, nb_alg )
       U10, U11, U12, ...
       U20, U21, U22 ] = FLA_Repart_2x2_to_3x3( UTL, UTR, ...
                                                UBL, UBR, ...
-                                               b, b, 'FLA_BR' );
+                                               b, b, 'FLA_BL' );
 
     %------------------------------------------------------------%
 
-    %                       update line 1                        %
-    %                             :                              %
-    %                       update line n                        %
+    B0 = B0 + U01 * B1;
+    B1 = U11 * B1;
 
     %------------------------------------------------------------%
 
@@ -51,7 +50,7 @@ function [ B_out ] = trmm_lunn(_B,_U_)_blk( B, U, nb_alg )
       UBL, UBR ] = FLA_Cont_with_3x3_to_2x2( U00, U01, U02, ...
                                              U10, U11, U12, ...
                                              U20, U21, U22, ...
-                                             'FLA_TL' );
+                                             'FLA_TR' );
 
   end
 
