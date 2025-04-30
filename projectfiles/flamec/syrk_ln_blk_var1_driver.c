@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
 
     FLA_Obj
         A, C, Cold, Cref;
-    FLA_Obj alpha, beta;
 
     /* Initialize FLAME. */
     FLA_Init();
@@ -44,9 +43,6 @@ int main(int argc, char *argv[])
         FLA_Obj_create( FLA_DOUBLE, n, n, 1, n, &Cold );
         FLA_Obj_create( FLA_DOUBLE, n, n, 1, n, &Cref );
 
-        // Create scalars
-        FLA_Obj_create_constant( FLA_DOUBLE, 1.0, &alpha );
-        FLA_Obj_create_constant( FLA_DOUBLE, 1.0, &beta );
 
         FLA_Random_matrix( A );
         FLA_Random_matrix( Cold );
@@ -57,7 +53,7 @@ int main(int argc, char *argv[])
             dtime = FLA_Clock();
 
             // Reference SYRK call: Cref := A * Aᵀ + Cref
-            FLA_Syrk( FLA_LOWER_TRIANGULAR, FLA_NO_TRANSPOSE, alpha, A, beta, Cref );
+            FLA_Syrk( FLA_LOWER_TRIANGULAR, FLA_NO_TRANSPOSE, FLA_ONE, A, FLA_ONE, Cref );
 
             dtime = FLA_Clock() - dtime;
 
@@ -77,7 +73,8 @@ int main(int argc, char *argv[])
             dtime = FLA_Clock();
 
             // Custom implementation
-            syrk_ln_blk_var1( A, C );
+            int block_size = 10;
+            syrk_ln_blk_var1( A, C, block_size);
 
             dtime = FLA_Clock() - dtime;
 
@@ -96,8 +93,6 @@ int main(int argc, char *argv[])
         FLA_Obj_free( &C );
         FLA_Obj_free( &Cref );
         FLA_Obj_free( &Cold );
-        FLA_Obj_free( &alpha );
-        FLA_Obj_free( &beta );
 
         i++;
     }
