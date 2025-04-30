@@ -16,7 +16,7 @@ function [ B_out ] = trmm_lunn_unb_var1(U,B)
 
   [ UTL, UTR, ...
     UBL, UBR ] = FLA_Part_2x2( U, ...
-                               0, 0, 'FLA_TR' );
+                               0, 0, 'FLA_TL' );
 
   while ( size( BT, 1 ) < size( B, 1 ) )
 
@@ -30,11 +30,11 @@ function [ B_out ] = trmm_lunn_unb_var1(U,B)
       u10t, upsilon11, u12t, ...
       U20,  u21,       U22 ] = FLA_Repart_2x2_to_3x3( UTL, UTR, ...
                                                       UBL, UBR, ...
-                                                      1, 1, 'FLA_BL' );
+                                                      1, 1, 'FLA_BR' );
 
     %------------------------------------------------------------%
 
-    B0 = u01 * b1t + B0;
+    B0 = B0 + u01*b1t;
     b1t = upsilon11 * b1t;
 
     %------------------------------------------------------------%
@@ -49,17 +49,12 @@ function [ B_out ] = trmm_lunn_unb_var1(U,B)
       UBL, UBR ] = FLA_Cont_with_3x3_to_2x2( U00,  u01,       U02,  ...
                                              u10t, upsilon11, u12t, ...
                                              U20,  u21,       U22, ...
-                                             'FLA_TR' );
+                                             'FLA_TL' );
 
   end
 
   B_out = [ BT
             BB ];
-
-  % Final verification
-fprintf('\n=== FINAL RESULT ===\n');
-fprintf('Computed result:\n'); disp(B_out);
-fprintf('Expected result (U*B):\n'); disp((U*B));
 
 
 end

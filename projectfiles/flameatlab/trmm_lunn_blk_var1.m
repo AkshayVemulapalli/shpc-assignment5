@@ -15,11 +15,11 @@ function [ B_out ] = trmm_lunn_blk_var1(U,B)
 
   [ UTL, UTR, ...
     UBL, UBR ] = FLA_Part_2x2( U, ...
-                               0, 0, 'FLA_TR' );
+                               0, 0, 'FLA_TL' );
 
   while ( size( BT, 1 ) < size( B, 1 ) )
 
-    b = min( size( BB, 1 ), 64 );
+    b =  size( BB, 1 );
 
     [ B0, ...
       B1, ...
@@ -31,7 +31,7 @@ function [ B_out ] = trmm_lunn_blk_var1(U,B)
       U10, U11, U12, ...
       U20, U21, U22 ] = FLA_Repart_2x2_to_3x3( UTL, UTR, ...
                                                UBL, UBR, ...
-                                               b, b, 'FLA_BL' );
+                                               b, b, 'FLA_BR' );
 
     %------------------------------------------------------------%
 
@@ -50,7 +50,7 @@ function [ B_out ] = trmm_lunn_blk_var1(U,B)
       UBL, UBR ] = FLA_Cont_with_3x3_to_2x2( U00, U01, U02, ...
                                              U10, U11, U12, ...
                                              U20, U21, U22, ...
-                                             'FLA_TR' );
+                                             'FLA_TL' );
 
   end
 
@@ -58,3 +58,4 @@ function [ B_out ] = trmm_lunn_blk_var1(U,B)
             BB ];
 
 end
+
