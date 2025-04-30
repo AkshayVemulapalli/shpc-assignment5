@@ -7,7 +7,7 @@
 % Programmed by: Name of author
 %                Email of author
 
-function [ B_out ] = Trmm_runn(_A,_B_)_unb( B, U )
+function [ B_out ] = trmm_lunn(_B,_U_)_unb( B, U )
 
   [ BT, ...
     BB ] = FLA_Part_2x1( B, ...
