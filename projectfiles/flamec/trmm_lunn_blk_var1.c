@@ -10,7 +10,7 @@
 
 #include "FLAME.h"
 
-int trmm_lunn_unb_var1_blk( FLA_Obj U, FLA_Obj B, int nb_alg )
+int trmm_lunn_blk_var1( FLA_Obj U, FLA_Obj B, int nb_alg )
 {
   FLA_Obj UTL,   UTR,      U00, U01, U02, 
           UBL,   UBR,      U10, U11, U12,
@@ -46,7 +46,7 @@ int trmm_lunn_unb_var1_blk( FLA_Obj U, FLA_Obj B, int nb_alg )
     /*------------------------------------------------------------*/
 
     //B0 = U01 * B1 + B0
-    FLA_Gemm( FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A, B, FLA_ONE, C );
+    FLA_Gemm( FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, U01, B1, FLA_ONE, B0 );
 
     //B1 = U11 * B1
     FLA_Trmm( FLA_LEFT, FLA_UPPER_TRIANGULAR, 

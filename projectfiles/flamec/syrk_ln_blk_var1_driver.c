@@ -7,7 +7,7 @@
 #define TRUE 1
 #define FALSE 0
 
-void syrk_ln_blk_var1( FLA_Obj, FLA_Obj );
+void syrk_ln_blk_var1( FLA_Obj, FLA_Obj, int block_size );
 
 int main(int argc, char *argv[])
 {

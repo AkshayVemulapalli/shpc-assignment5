@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
             dtime = FLA_Clock();
 
             // Custom implementation
-            syrk_ln_ub_var1( A, C);
+            syrk_ln_unb_var1( A, C);
 
             dtime = FLA_Clock() - dtime;
 
