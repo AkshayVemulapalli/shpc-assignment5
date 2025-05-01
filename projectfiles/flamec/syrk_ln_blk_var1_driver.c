@@ -45,7 +45,9 @@ int main(int argc, char *argv[])
 
 
         FLA_Random_matrix( A );
-        FLA_Random_matrix( Cold );
+        FLA_Random_tri_matrix( FLA_LOWER_TRIANGULAR,
+            FLA_NONUNIT_DIAG,
+            Cold );
 
         for ( irep=0; irep<nrepeats; irep++ ) {
             FLA_Copy( Cold, Cref );
@@ -74,7 +76,7 @@ int main(int argc, char *argv[])
 
             // Custom implementation
             int block_size = 10;
-            syrk_ln_blk_var1( A, C, block_size);
+            syrk_ln_blk_var1( C, A, block_size);
 
             dtime = FLA_Clock() - dtime;
 

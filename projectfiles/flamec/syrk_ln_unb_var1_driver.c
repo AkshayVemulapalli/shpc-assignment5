@@ -4,6 +4,25 @@
 
 #include "FLAME.h"
 
+// static void print_matrix( char *name, FLA_Obj M )
+// {
+//     int i, j;
+//     int m  = FLA_Obj_length( M );
+//     int n  = FLA_Obj_width( M );
+//     int rs = FLA_Obj_row_stride( M );
+//     int cs = FLA_Obj_col_stride( M );
+//     double *buf = ( double * ) FLA_Obj_buffer( M );
+
+//     printf( "=== %s (%dx%d) ===\n", name, m, n );
+//     for ( i = 0; i < m; ++i )
+//     {
+//         for ( j = 0; j < n; ++j )
+//             printf( " %8.4f", buf[ i*rs + j*cs ] );
+//         printf( "\n" );
+//     }
+//     printf( "====================\n\n" );
+// }
+
 #define TRUE 1
 #define FALSE 0
 
@@ -45,7 +64,11 @@ int main(int argc, char *argv[])
 
 
         FLA_Random_matrix( A );
-        FLA_Random_matrix( Cold );
+        FLA_Random_tri_matrix( FLA_LOWER_TRIANGULAR,
+            FLA_NONUNIT_DIAG,
+            Cold );
+
+
 
         for ( irep=0; irep<nrepeats; irep++ ) {
             FLA_Copy( Cold, Cref );
@@ -54,6 +77,7 @@ int main(int argc, char *argv[])
 
             // Reference SYRK call: Cref := A * Aᵀ + Cref
             FLA_Syrk( FLA_LOWER_TRIANGULAR, FLA_NO_TRANSPOSE, FLA_ONE, A, FLA_ONE, Cref );
+
 
             dtime = FLA_Clock() - dtime;
 
@@ -73,7 +97,8 @@ int main(int argc, char *argv[])
             dtime = FLA_Clock();
 
             // Custom implementation
-            syrk_ln_unb_var1( A, C);
+            syrk_ln_unb_var1( C, A);
+
 
             dtime = FLA_Clock() - dtime;
 
